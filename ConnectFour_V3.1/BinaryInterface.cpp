@@ -1,6 +1,5 @@
 #include "BinaryInterface.h"
 
-
 int BinaryInterface::login() {
     string username;
 
@@ -105,15 +104,14 @@ void BinaryInterface::adminMenu() {
                 string username;
                 cout << "Enter the user's username: ";
                 cin >> username;
-                
+
                 currUser.setUsername("NULL");
                 fstream bin(userFile, ios::in | ios::out | ios::binary);
                 userSpot = findUser(bin, username);
                 bin.close();
                 if (userSpot != -1) {
                     currUser.print();
-                }
-                else cout << "User not found!" << endl;
+                } else cout << "User not found!" << endl;
                 break;
             }
             case 2:
@@ -126,12 +124,17 @@ void BinaryInterface::adminMenu() {
                 userSpot = findUser(bin, username); //Save userspot for overwriting
                 bin.close();
 
-                fstream bin2(userFile, ios::in | ios::out | ios::binary);
-                long cursor = userSpot * sizeof (User);
-                bin2.seekp(cursor, ios::beg);
-                currUser.setUsername("DELETED");
-                currUser.write(bin2);
-                bin2.close();
+                if (userSpot != -1) {
+                    fstream bin2(userFile, ios::in | ios::out | ios::binary);
+                    long cursor = userSpot * sizeof (User);
+                    bin2.seekp(cursor, ios::beg);
+                    currUser.setUsername("DELETED");
+                    currUser.write(bin2);
+                    bin2.close();
+                    
+                    cout << username << " stats have been deleted." << endl;
+                } else cout << username << " has no stats saved!" << endl;
+
 
                 break;
             }
@@ -141,7 +144,7 @@ void BinaryInterface::adminMenu() {
             default:
                 cout << "Invalid choice. Please enter a valid option." << endl;
                 cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(),'\n'); 
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
     } while (choice != 3);
 }
