@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8">
+    <title>Connect 4</title>
+    <style>
+        body {
+            background-color: white;
+        }
+        div#board{
+            position: relative;
+            width: 750px;
+            height: 600px;
+            margin: auto;
+            background:blue no-repeat;
+        }
+        div#messageArea {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            color: white;
+        }
+        table {
+            position: absolute;
+	    top: 20px;
+            left: 40px;
+            border-spacing: 0px;
+        }
+        td {
+            width: 94px;
+            height: 94px;
+            background: url(circle.png) no-repeat;
+            background-size: 94px, 94px;
+        }
+        form {
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            padding: 10px;
+            background-color: grey;
+        }
+        form input {
+            background-color: white;
+            border-color: black;
+            width: 100px;
+            font-size: 1em;
+        }
+        .red {
+            background: url("red.png") no-repeat center center;
+            background-size: 94px, 94px;
+        }
+        .yellow {
+            background: url("yellow.png") no-repeat center center;
+            background-size: 83px, 83px;
+        }
+    </style>
+</head>
+<body>
+    <div id="board">
+        <div id="messageArea"></div>
+        <table>
+            <tr>
+                <td id="00"></td><td id="01"></td><td id="02"></td><td id="03">
+                </td><td id="04"></td> <td id="05"></td><td id="06"></td>
+            </tr>
+            <tr>
+                <td id="10"></td><td id="11"></td><td id="12"></td><td id="13"></td>
+                <td id="14"></td> <td id="15"></td><td id="16"></td>
+            </tr>
+            <tr>
+                <td id="20"></td><td id="21"></td><td id="22"></td><td id="23"></td>
+                <td id="24"></td> <td id="25"></td><td id="26"></td>
+            </tr>
+            <tr>
+                <td id="30"></td><td id="31"></td><td id="32"></td><td id="33"></td>
+                <td id="34"></td> <td id="35"></td><td id="36"></td>
+            </tr>
+            <tr>
+                <td id="40"></td><td id="41"></td><td id="42"></td><td id="43"></td>
+                <td id="44"></td> <td id="45"></td><td id="46"></td>
+            </tr>
+            <tr>
+                <td id="50"></td><td id="51"></td><td id="52"></td><td id="53"></td>
+                <td id="54"></td> <td id="55"></td><td id="56"></td>
+            </tr>
+        </table>
+    </div>
+	<form>
+            <input type="text" id="userMove" placeholder="0">
+            <input type="button" id="getMove" value="Place">
+        </form>
+<script src="Connect4.js"></script>
+</body>
+</html>
+
