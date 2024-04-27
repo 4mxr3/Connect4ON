@@ -54,6 +54,7 @@ void BinaryInterface::updateRecord(int **b, int r) {
 int BinaryInterface::findUser(fstream &bin, string username) {
     bin.seekg(0, ios::beg); //move read cursor to the beginning
     int count = -1;
+    currUser.setUsername("NULL");
 
     //Read in users from the binary file until you find the matching username or 
     //reach the end of the file
