@@ -2,3 +2,4 @@
 *.o
 *.d
 *.exe
+/ConnectFour_V4/nbproject/private/
