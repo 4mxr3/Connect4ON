@@ -9,19 +9,19 @@ CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=Cygwin-Windows
 CND_ARTIFACT_DIR_Debug=dist/Debug/Cygwin-Windows
-CND_ARTIFACT_NAME_Debug=game_v2.1
-CND_ARTIFACT_PATH_Debug=dist/Debug/Cygwin-Windows/game_v2.1
+CND_ARTIFACT_NAME_Debug=connectfour_v2.2
+CND_ARTIFACT_PATH_Debug=dist/Debug/Cygwin-Windows/connectfour_v2.2
 CND_PACKAGE_DIR_Debug=dist/Debug/Cygwin-Windows/package
-CND_PACKAGE_NAME_Debug=gamev2.1.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/Cygwin-Windows/package/gamev2.1.tar
+CND_PACKAGE_NAME_Debug=connectfourv2.2.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/Cygwin-Windows/package/connectfourv2.2.tar
 # Release configuration
 CND_PLATFORM_Release=Cygwin-Windows
 CND_ARTIFACT_DIR_Release=dist/Release/Cygwin-Windows
-CND_ARTIFACT_NAME_Release=game_v2.1
-CND_ARTIFACT_PATH_Release=dist/Release/Cygwin-Windows/game_v2.1
+CND_ARTIFACT_NAME_Release=connectfour_v2.2
+CND_ARTIFACT_PATH_Release=dist/Release/Cygwin-Windows/connectfour_v2.2
 CND_PACKAGE_DIR_Release=dist/Release/Cygwin-Windows/package
-CND_PACKAGE_NAME_Release=gamev2.1.tar
-CND_PACKAGE_PATH_Release=dist/Release/Cygwin-Windows/package/gamev2.1.tar
+CND_PACKAGE_NAME_Release=connectfourv2.2.tar
+CND_PACKAGE_PATH_Release=dist/Release/Cygwin-Windows/package/connectfourv2.2.tar
 #
 # include compiler specific variables
 #

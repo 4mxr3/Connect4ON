@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=Game v2.1
+PROJECTNAME=ConnectFour_V2.2
 
 # Active Configuration
 DEFAULTCONF=Debug
