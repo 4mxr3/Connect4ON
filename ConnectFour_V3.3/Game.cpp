@@ -313,24 +313,28 @@ void Game::reset() {
 void Game::menu() {
     int choice;
     do {
-
         cout << "Menu:" << endl;
         cout << "1. Player vs player" << endl;
         cout << "2. Player vs computer" << endl;
         cout << "3. Print Stats" << endl;
         cout << "4. Quit" << endl;
         cout << "Enter your choice: ";
-        cin >> choice;
+
+        // Input handling with validation
+        while (!(cin >> choice)) {
+            cin.clear(); // Clear error flag from input stream
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Ignore incorrect input
+            cout << "Invalid input. Please enter a number between 1 and 4." << endl;
+            cout << "Enter your choice: ";
+        }
 
         switch (choice) {
             case 1:
                 playerVsPlayer();
                 break;
             case 2:
-            {
                 playerVsComputer();
                 break;
-            }
             case 3:
                 printStats();
                 break;
