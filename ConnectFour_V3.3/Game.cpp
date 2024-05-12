@@ -30,88 +30,67 @@ Game::~Game() {
 //player move
 
 int Game::plaMove(int *spot, int playerNumber) {
-    bool verify = true;
+    bool verify = false;
     do {
-        verify = true;
-        cout << endl << "Player " << playerNumber << ", please put a legal column(0 to " << gameBoard->col -1 <<", left to right)" << endl;
+        cout << endl << "Player " << playerNumber << ", please put a legal column (0 to 6, left to right): ";
         cin >> pMove;
-        if (pMove > gameBoard->col - 1 || pMove < 0) { // goes down till to bottom then places move if open
-            verify = false;
-            cout << "Please choose a different column" << endl;
+
+        // Adjust the player input here to align with 0-based array indexing
+        pMove--;  // Subtract 1 from the input to match the 0-based index of the array
+
+        // Check if the input is not an integer, out of range, or not in the valid range
+        if (cin.fail() || pMove > 6 || pMove < 0) {
+            cin.clear(); // Clear error flag
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Ignore wrong input
+            cout << "Invalid input. Please choose a valid column." << endl;
+        } else {
+            // Check if the column is full
+            if (gameBoard->game[0][pMove] != 0) {
+                cout << "Column " << pMove + 1 << " is full. Please choose a different column." << endl;
+            } else {
+                verify = true; // Input is valid and column is not full
+            }
         }
     } while (!verify);
 
-    for (int i = gameBoard->row-1; i >= 0; i--) {
+    // Place the marker in the lowest empty spot in the column
+    for (int i = 5; i >= 0; i--) {
         if (gameBoard->game[i][pMove] == 0) {
             gameBoard->game[i][pMove] = playerNumber;
             break;
         }
     }
+
+    // Inform player of their turn and display board state
     cout << "Player " << playerNumber << "'s Turn" << endl;
-    display(); // Move the display() call here
+    display();   
     cout << endl;
     spot++;
     return playerNumber;
 }
 
 int Game::AIMove(int *spot) {
-    int move = rand() % 3;
-    int block = rand() % 2;
+    int move = rand() % 7; // Change to ensure AI considers all columns equally
     bool success = false;
 
-    if (block == 0) {
-        if (move == 0) {
-            for (int i = gameBoard->row - 1; i >= 0; i--) { // goes down till bottom to put move in
-                if (gameBoard->game[i][pMove] == 0) {
-                    gameBoard->game[i][pMove] = comp;
-                    success = true;
-                    break;
-                }
-            }
-        }
-        if (move == 1 || success == false) {
-            for (int i = gameBoard->row - 1; i >= 0; i--) {
-                for (int j = 1; j <= gameBoard->col -1 - pMove; j++){
-                    if (gameBoard->game[i][pMove + j] == 0) {
-                        gameBoard->game[i][pMove + j] = comp;
-                        success = true;
-                        break;
-                    }
-                }
-                if (success)
-                    break;
-            }
-        }
-        if (move == 2 || success == false) {
-            for (int i = gameBoard->row - 1; i >= 0; i--) {
-                for (int j = gameBoard->col - 1; j >= pMove - j; j--){
-                    if (gameBoard->game[i][pMove - j] == 0) {
-                        gameBoard->game[i][pMove - j] = comp;
-                        success = true;
-                        break;
-                    }
-                    if (success)
-                    break;
-                }
-                if (success)
-                    break;
-            }
-        }
-
-    } else if (block == 1 || success == false) {
-        do {
-            move = rand() % gameBoard->row;
-            for (int i = gameBoard->row-1; i >= 0; i--) {
-                if (gameBoard->game[i][move] == 0) {
+    while (!success) {
+        for (int i = 5; i >= 0; i--) {
+            // Check if current slot is empty
+            if (gameBoard->game[i][move] == 0) {
+                // Additional check to ensure the token is placed in the lowest possible spot
+                if (i == 5 || gameBoard->game[i + 1][move] != 0) {
                     gameBoard->game[i][move] = comp;
                     success = true;
                     break;
                 }
             }
+        }
 
-        } while (!success);
+        // If a valid move hasn't been made, choose another column
+        if (!success) {
+            move = (move + 1) % 7; // Cycle through columns
+        }
     }
-
 
     cout << "Computer Turn" << endl;
     display();
@@ -199,14 +178,13 @@ void Game::display() {
         }
         cout << endl;
     }
-
 }
 
 void Game::playerVsPlayer() {
     int *spots = 0;
     int turn;
     bool gOver;
-    int moves = gameBoard->col * gameBoard->row;
+    int moves = 42;
 
     do {
         // Player 1's move
@@ -246,7 +224,7 @@ void Game::playerVsComputer() {
     int spots = 0; // Initialize spots to 0
     int turn;
     bool gOver;
-    int moves = gameBoard->col * gameBoard->row;
+    int moves = 42;
 
     do {
         // Player's move
@@ -289,11 +267,11 @@ Game::Game(BinaryInterface bin) {
     gameBoard->row = 6;
     gameBoard->col = 7;
     gameBoard->game = new int*[gameBoard->row];
-    for (int i = 0; i < gameBoard-> col; i++) { //create new arrays
+    for (int i = 0; i < gameBoard-> col; i++) {
         gameBoard->game[i] = new int[gameBoard->col];
     }
 
-    for (int i = 0; i < gameBoard->row; i++) { //set all places to equal 0;
+    for (int i = 0; i < gameBoard->row; i++) {
         for (int j = 0; j < gameBoard->col; j++) {
             gameBoard->game[i][j] = 0;
         }
@@ -346,44 +324,10 @@ void Game::menu() {
 
         switch (choice) {
             case 1:
-                cout << "Board Size" << endl;
-                cout << "Enter Columns: ";
-                cin >> gameBoard->col;
-                cout << endl << "Enter Rows: ";
-                cin >> gameBoard->row;
-                delete gameBoard->game; // quick fix to create a custom board
-                gameBoard->game = new int*[gameBoard->row]; // create board
-                for (int i = 0; i < gameBoard->row; i++) {
-                    gameBoard->game[i] = new int[gameBoard->col];
-                }
-
-                for (int i = 0; i < gameBoard->row; i++) { // clear board
-                    for (int j = 0; j < gameBoard->col; j++) {
-                        gameBoard->game[i][j] = 0;
-                    }
-                }
-                
                 playerVsPlayer();
                 break;
             case 2:
             {
-                cout << "Board Size" << endl;
-                cout << "Enter Columns: ";
-                cin >> gameBoard->col;
-                cout << endl << "Enter Rows: ";
-                cin >> gameBoard->row;
-                delete gameBoard->game; // quick fix to create a custom board
-                gameBoard->game = new int*[gameBoard->row]; // create board
-                for (int i = 0; i < gameBoard->row; i++) {
-                    gameBoard->game[i] = new int[gameBoard->col];
-                }
-
-                for (int i = 0; i < gameBoard->row; i++) { // clear board
-                    for (int j = 0; j < gameBoard->col; j++) {
-                        gameBoard->game[i][j] = 0;
-                    }
-                }
-                
                 playerVsComputer();
                 break;
             }

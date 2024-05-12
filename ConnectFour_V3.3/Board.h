@@ -8,8 +8,10 @@
 #ifndef BOARD_H
 #define BOARD_H
 
-struct BOARD
+class BOARD
 {
+    
+public:
     int row, col;
     int **game; // a standard connect four game is 6 x 7
 };

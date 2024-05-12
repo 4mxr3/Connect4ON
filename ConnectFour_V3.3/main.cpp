@@ -29,11 +29,11 @@ using namespace std;
 //Execution begins here!
 
 int main(int argc, char** argv) {
-    srand(static_cast<unsigned int> (time(0))); // randomizer
+    srand(static_cast<unsigned int> (time(0)));
 
-    BinaryInterface bin; // binary file to hold stuff as well as to run code menus
+    BinaryInterface bin;
 
-    int result = bin.login(); // runs login and gather reuslt
+    int result = bin.login();
 
     switch (result) {
         case 1:
