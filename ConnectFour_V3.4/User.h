@@ -18,16 +18,19 @@ using namespace std;
 class User{
 private:
     char username[20];
+    char password[20];
     int gameResult[3] = {-1,-1,-1}; //1=win, 2=loss, 3=tie, -1=no data saved
-    int game[3][7][6]; // 3 different games, 7 columns, 6 rows 
-    int winLoss[3]; // wins vs losses vs tie
-    
+    int game[3][6][7]; // 3 different games, 6 columns, 7 rows 
+    int winLoss[3]; // wins vs losses vs tie 
 public:
     User();
     void reset();
     
     void setUsername(string);
     string getUsername(){return username;}
+    
+    void setPassword(string);
+    string getPassword(){return password;}
     
     void addResult(int **, int);
     void print();

@@ -45,6 +45,9 @@ int main(int argc, char** argv) {
             Game game1(bin);
             break;
         }
+        case -1:
+            cout << "Incorrect password. Please try again or use a different account." << endl;
+            return 0;
         default:
             cout << "Error logging in. Exiting program." << endl;
             return 0;

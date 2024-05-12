@@ -12,13 +12,14 @@ int BinaryInterface::login() {
         cin >> username;
     }
 
+    //If admin
     if (username == "admin") {
         cout << "Enter password: ";
         cin >> username;
         if (username == "password") {
             return 1;
         }
-    } else {
+    } else { //If user
 
         fstream bin(userFile, ios::in | ios::out | ios::binary);
         userSpot = findUser(bin, username); //Save userspot for overwriting
@@ -28,6 +29,13 @@ int BinaryInterface::login() {
         if (userSpot == -1) {
             currUser.setUsername(username);
             addUser();
+        } else { //If user was found, ask for password
+            cout << "Enter password: ";
+            cin >> username;
+
+            if (username == currUser.getPassword()) {
+                return 0;
+            } else return -1;
         }
         return 0;
     }
@@ -53,10 +61,11 @@ void BinaryInterface::updateRecord(int **b, int r) {
 
 int BinaryInterface::findUser(fstream &bin, string username) {
     bin.seekg(0, ios::beg); //move read cursor to the beginning
-    int count = -1;
+    int count = 0;
 
     //Read in users from the binary file until you find the matching username or 
     //reach the end of the file
+    currUser.read(bin);
     while (username != currUser.getUsername() && !bin.eof()) {
         currUser.read(bin);
         count++;
@@ -75,8 +84,22 @@ void BinaryInterface::addUser() {
     currUser.reset();
     currUser.setUsername(temp);
 
+    //Get password for new user
+    string pass;
+
+    cout << "Enter password for new user " << currUser.getUsername() << ": ";
+    cin >> pass;
+
+    while (pass.length() > 20) {
+        cout << "Password must be less than 20 characters. Try a new password." << endl;
+        cout << "Enter password: ";
+        cin >> pass;
+    }
+
+    currUser.setPassword(pass);
+
     //Write this new data to binary file
-    fstream bin(userFile, ios::out | ios::binary | ios::app); //Open file in append mode
+    fstream bin(userFile, ios::out | ios::binary | ios::app); //Open file in append
     currUser.write(bin);
     bin.close();
 
@@ -91,10 +114,11 @@ void BinaryInterface::adminMenu() {
     int choice;
     do {
 
-        cout << "Menu:" << endl;
+        cout << endl << "Menu:" << endl;
         cout << "1. Display a User's Stats" << endl;
         cout << "2. Delete User" << endl;
-        cout << "3. Quit" << endl;
+        cout << "3. Change a User's Password" << endl;
+        cout << "4. Quit" << endl;
         cout << "Enter your choice: ";
         cin >> choice;
 
@@ -131,7 +155,7 @@ void BinaryInterface::adminMenu() {
                     currUser.setUsername("DELETED");
                     currUser.write(bin2);
                     bin2.close();
-                    
+
                     cout << username << " stats have been deleted." << endl;
                 } else cout << username << " has no stats saved!" << endl;
 
@@ -139,6 +163,43 @@ void BinaryInterface::adminMenu() {
                 break;
             }
             case 3:
+            {
+                string username;
+                cout << "Enter the user's username: ";
+                cin >> username;
+
+                fstream bin(userFile, ios::in | ios::out | ios::binary);
+                userSpot = findUser(bin, username); //Save userspot for overwriting
+                bin.close();
+
+                if (userSpot != -1) {
+                    fstream bin2(userFile, ios::in | ios::out | ios::binary);
+                    long cursor = userSpot * sizeof (User);
+                    bin2.seekp(cursor, ios::beg);
+
+                    string newPass;
+                    cout << "Enter new password for " <<
+                            currUser.getUsername() << ": ";
+                    cin >> newPass;
+
+                    while (newPass.length() > 20) {
+                        cout << "Password must be less than 20 characters. Try a new password." << endl;
+                        cout << "Enter password: ";
+                        cin >> newPass;
+                    }
+                    currUser.setPassword(newPass);
+                    
+                    currUser.write(bin2);
+                    bin2.close();
+
+                    cout << currUser.getUsername() << "'s password is now " << 
+                            currUser.getPassword() << endl;
+                } else cout << username << " has no stats saved!" << endl;
+
+
+                break;
+            }
+            case 4:
                 cout << "Exiting the program. Goodbye!" << endl;
                 return;
             default:
@@ -146,5 +207,5 @@ void BinaryInterface::adminMenu() {
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
-    } while (choice != 3);
+    } while (choice != 4);
 }

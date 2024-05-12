@@ -16,6 +16,8 @@ User::User() {
             }
         }
     }
+    
+    password[0] = '\0';
 }
 
 void User::reset() {
@@ -34,6 +36,8 @@ void User::reset() {
             }
         }
     }
+    
+    password[0] = '\0';
 }
 
 void User::setUsername(string s) {
@@ -41,6 +45,13 @@ void User::setUsername(string s) {
         username[i] = s[i];
     }
     username[s.length()] = '\0';
+}
+
+void User::setPassword(string s) {
+    for (int i = 0; i < s.length(); i++) {
+        password[i] = s[i];
+    }
+    password[s.length()] = '\0';
 }
 
 void User::addResult(int **gameB, int result) {
