@@ -2,33 +2,45 @@
 
 int BinaryInterface::login() {
     string username;
+    int choice;
 
-    cout << "Enter username: ";
-    cin >> username;
+    cout << "1. Login" << endl;
+    cout << "2. Create an account" << endl;
+    cin >> choice;
 
-    while (username.length() > 20) {
-        cout << "Username must be less than 20 characters. Try a new username." << endl;
-        cout << "Enter username: ";
-        cin >> username;
+    while (choice < 1 || choice > 2) {
+        cout << "Please enter a number between 1-2: " << endl;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cin >> choice;
     }
 
-    //If admin
-    if (username == "admin") {
-        cout << "Enter password: ";
+    if (choice == 1) {
+        cout << "Enter username: ";
         cin >> username;
-        if (username == "password") {
-            return 1;
+
+        while (username.length() > 20) {
+            cout << "Username must be less than 20 characters. Try a valid username." << endl;
+            cout << "Enter username: ";
+            cin >> username;
         }
-    } else { //If user
+
+        //If admin
+        if (username == "admin") {
+            cout << "Enter password: ";
+            cin >> username;
+            if (username == "password") {
+                return 1;
+            }
+        }
 
         fstream bin(userFile, ios::in | ios::out | ios::binary);
         userSpot = findUser(bin, username); //Save userspot for overwriting
         bin.close();
-
-        //User was not found, add them to the file
+        
+        
         if (userSpot == -1) {
-            currUser.setUsername(username);
-            addUser();
+            return -2;
         } else { //If user was found, ask for password
             cout << "Enter password: ";
             cin >> username;
@@ -36,6 +48,26 @@ int BinaryInterface::login() {
             if (username == currUser.getPassword()) {
                 return 0;
             } else return -1;
+        }
+    } else {
+        cout << "Choose a username: ";
+        cin >> username;
+
+        while (username.length() > 20) {
+            cout << "Username must be less than 20 characters. Try a valid username." << endl;
+            cout << "Enter username: ";
+            cin >> username;
+        }
+
+        fstream bin(userFile, ios::in | ios::out | ios::binary);
+        userSpot = findUser(bin, username); //Save userspot for overwriting
+        bin.close();
+
+        if (userSpot != -1) {
+            return -3;
+        } else { //If user was not found, ask for password
+            currUser.setUsername(username);
+            addUser();
         }
         return 0;
     }
@@ -188,11 +220,11 @@ void BinaryInterface::adminMenu() {
                         cin >> newPass;
                     }
                     currUser.setPassword(newPass);
-                    
+
                     currUser.write(bin2);
                     bin2.close();
 
-                    cout << currUser.getUsername() << "'s password is now " << 
+                    cout << currUser.getUsername() << "'s password is now " <<
                             currUser.getPassword() << endl;
                 } else cout << username << " has no stats saved!" << endl;
 

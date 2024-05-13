@@ -40,13 +40,20 @@ int main(int argc, char** argv) {
             //ADMIN LOGIN
             bin.adminMenu();
             break;
-        case 0: {
+        case 0:
+        {
             //USER LOGIN
             Game game1(bin);
             break;
         }
         case -1:
             cout << "Incorrect password. Please try again or use a different account." << endl;
+            return 0;
+        case -2:
+            cout << "Error. User not found" << endl;
+            return 0;
+        case -3:
+            cout << "User already exist. Try a different username." << endl;
             return 0;
         default:
             cout << "Error logging in. Exiting program." << endl;
