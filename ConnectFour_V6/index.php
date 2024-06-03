@@ -23,7 +23,9 @@ include("./includes/header.php");
 
 <div id="response">
     <?php
-    echo $_SESSION["err"];
+    if ($_SESSION['err'] ?? false){
+        echo $_SESSION["err"];
+    }
     $_SESSION["err"] = "";
     ?>
 </div>
