@@ -1,0 +1,93 @@
+body {
+    background-color: white;
+}
+div#board{
+    position: relative;
+    width: 750px;
+    height: 600px;
+    margin: auto;
+    background:blue no-repeat;
+}
+div#messageArea {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    color: white;
+}
+table {
+    position: absolute;
+    top: 20px;
+    left: 40px;
+    border-spacing: 0px;
+}
+td {
+    width: 94px;
+    height: 94px;
+    background: url(circle.png) no-repeat;
+    background-size: 94px, 94px;
+}
+form#placeInput {
+    position: absolute;
+    top: 50px;
+    right: 0px;
+    padding: 10px;
+    background-color: grey;
+}
+form#placeInput input {
+    background-color: white;
+    border-color: black;
+    width: 100px;
+    font-size: 1em;
+}
+.red {
+    background: url("red.png") no-repeat center center;
+    background-size: 94px, 94px;
+}
+.yellow {
+    background: url("yellow.png") no-repeat center center;
+    background-size: 83px, 83px;
+}
+
+header{
+    color: white;
+    background: linear-gradient(#2f76fa, #1938ff);
+    font-size: 18px;
+    padding: .5em .5em 1.5em;
+    margin-bottom: 2em;
+    border-radius: .2em;
+}
+
+header a {
+    text-decoration: none;
+    color: white;
+    float: right;
+}
+
+#menu {
+    width: 600px;
+    margin: auto;
+}
+
+#menu a{
+    margin-left: 10px;
+
+}
+
+header a:hover{
+    background-color: indianred;
+}
+
+#login{
+    text-align: center;
+}
+
+#response {
+    text-align: center;
+}
+
+footer {
+    text-align: center;
+    font-size: 10px;
+    font-style: italic;
+    color: grey;
+}
