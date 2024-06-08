@@ -8,6 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $currUser->setPass($_POST["pass"]);
     $currUser->setfName(ucfirst($_POST["fname"]));
     $currUser->setlName(ucfirst($_POST["lname"]));
+    $currUser->setAdmin($_POST["admin"]);
     
     $result = $currUser->addToSql();
 } else {
