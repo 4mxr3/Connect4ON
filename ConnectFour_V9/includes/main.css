@@ -1,0 +1,210 @@
+/* main.css */
+
+/* Additional styles for form input alignment */
+form {
+    width: 300px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+form label {
+    display: inline-block;
+    width: 100px;
+    text-align: right;
+}
+
+form input[type="text"],
+form input[type="password"],
+form input[type="number"],
+form input[type="submit"],
+form button[type="button"] {
+    width: 150px;
+    margin-left: 10px;
+}
+
+form input[type="radio"] {
+    margin-left: 10px;
+}
+
+form div {
+    margin-bottom: 10px;
+}
+
+/* Center the Admin radio buttons */
+form div.radio-group {
+    text-align: center;
+}
+
+form div.radio-group label {
+    text-align: left;
+}
+
+form div.submit-group {
+    text-align: center;
+}
+
+form div.submit-group input,
+form div.submit-group button {
+    width: 150px;
+    display: inline-block;
+    margin: 0 5px;
+}
+
+#login {
+    text-align: center;
+}
+
+#response {
+    text-align: center;
+}
+
+/* Existing styles */
+
+body {
+    background-color: white;
+}
+
+div#board {
+    position: relative;
+    width: 750px;
+    height: 600px;
+    margin: auto;
+    background: blue no-repeat;
+}
+
+div#messageArea {
+    width: 750px;
+    margin: 20px auto;
+    text-align: center;
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+table#gameBoard {
+    position: relative;
+    border-spacing: 0px;
+    margin: auto;
+}
+
+table#gameBoard td {
+    width: 94px;
+    height: 94px;
+    background: url(circle.png) no-repeat;
+    background-size: 94px, 94px;
+}
+
+form#placeInput {
+    width: 750px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+form#placeInput input[type="text"] {
+    background-color: white;
+    border-color: black;
+    width: 100px;
+    font-size: 1em;
+    padding: 5px;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+form#placeInput input[type="button"] {
+    background-color: #2f76fa;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+form#placeInput input[type="button"]:hover {
+    background-color: #1938ff;
+    transform: scale(1.05);
+}
+
+table#gameBoard .red {
+    background: url("red.png") no-repeat center center;
+    background-size: 94px, 94px;
+}
+
+table#gameBoard .yellow {
+    background: url("yellow.png") no-repeat center center;
+    background-size: 83px, 83px;
+    color: #FFD700; /* Darker yellow for better visibility */
+}
+
+header {
+    color: white;
+    background: linear-gradient(#2f76fa, #1938ff);
+    font-size: 18px;
+    padding: 0.5em 1em;
+    margin-bottom: 2em;
+    border-radius: 0.2em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    height: 25px; /* Adjust the height to your preference */
+}
+
+.header-left {
+    flex: 1;
+    text-align: left;
+}
+
+.header-center {
+    flex: 1;
+    text-align: center;
+}
+
+.header-right {
+    flex: 1;
+    text-align: right;
+}
+
+header a {
+    text-decoration: none;
+    color: white;
+    margin: 0 10px;
+}
+
+header a:hover {
+    background-color: indianred;
+}
+
+footer {
+    text-align: center;
+    font-size: 10px;
+    font-style: italic;
+    color: grey;
+}
+
+#reportTable {
+    width: 100%;
+}
+
+#tableButton, #reportTable th {
+    background: linear-gradient(#2f76fa, #1938ff);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#tableButton {
+    padding: 2px 50px;
+    border-radius: 0.2em;
+    border-color: #1938ff;
+}
+
+#reportTable table, #reportTable th, #reportTable td {
+    border: 1px solid black;
+    border-radius: 0.2em;
+}
