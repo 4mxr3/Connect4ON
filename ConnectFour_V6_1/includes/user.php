@@ -133,13 +133,14 @@ class User {
             return -1;
         }
         
-        $query = "INSERT INTO `entity_user`(`username`, `password`, `first_name`, `last_name`, `wins`, `losses`, `ties`) VALUES (:u,:p,:fn,:ln,'0','0','0')";
+        $query = "INSERT INTO `entity_user`(`username`, `password`, `first_name`, `last_name`, `wins`, `losses`, `ties`, `admin`) VALUES (:u,:p,:fn,:ln,'0','0','0',:a)";
 
         $statement = $pdo->prepare($query);
         $statement->bindParam(":u", $this->username);
         $statement->bindParam(":p", $this->password);
         $statement->bindParam(":fn", $this->fname);
         $statement->bindParam(":ln", $this->lname);
+        $statement->bindParam(":a", $this->admin);
 
         $statement->execute();
     }

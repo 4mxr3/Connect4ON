@@ -20,6 +20,10 @@ include("./includes/header.php");
         <br>
         <label for="lname">Last Name:</label>
         <input type="text" name="lname">
+        <br>
+        <label for="admin">Admin:</label>
+        Yes<input type="radio" name="admin" value="1">
+        No<input type="radio" name="admin" value="0" checked>
         <br> <br>
         <input type="submit" value="Register">
         <br> <br>

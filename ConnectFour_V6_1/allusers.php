@@ -56,6 +56,7 @@ include("./includes/header.php");
         echo "<th><button id='tableButton' value='3' onclick='sortTable(this.value,1)' >Wins</button></th>";
         echo "<th><button id='tableButton' value='4' onclick='sortTable(this.value,1)' >Losses</button></th>";
         echo "<th><button id='tableButton' value='5' onclick='sortTable(this.value,1)' >Ties</button></th>";
+        echo "<th><button id='tableButton' value='6' onclick='sortTable(this.value,1)' >Admin</button></th>";
         echo "<th>Edit</th>";
         echo "<th>Delete</th>";
         echo "</tr>";
@@ -67,6 +68,8 @@ include("./includes/header.php");
             echo "<td>" . $userAry[$i]->getWins() . "</td>";
             echo "<td>" . $userAry[$i]->getLosses() . "</td>";
             echo "<td>" . $userAry[$i]->getTies() . "</td>";
+            $a = ($userAry[$i]->getAdmin()) ? "Yes" : "No";
+            echo "<td>" . $a . "</td>";
 
             //Edit Button
             echo "<td>";
